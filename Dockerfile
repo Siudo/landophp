@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     tar
 
+
 COPY ./start.sh /var/installation-files
 RUN chmod +x /var/installation-files/start.sh
 RUN /var/installation-files/start.sh
