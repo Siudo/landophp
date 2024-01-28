@@ -1,0 +1,43 @@
+version: "4.11"
+services:
+    app:
+        image: php:8.1-fpm
+        container_name: project_name
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www/
+        networks:
+            - project_name
+
+    nginx:
+        image: nginx:1.17-alpine
+        container_name: training_nginx
+        restart: unless-stopped
+        working_dir: /var/www/
+        ports:
+            - "9999:80"
+        volumes:
+            - ./:/var/www/
+            - ./Docker/nginx:/etc/nginx/conf.d
+        networks:
+            - project_name
+    db:
+        image: bitnami/mysql:5.7.29-debian-10-r51
+        container_name: training_mysql
+        restart: unless-stopped
+        ports:
+            - "3308:3306"
+        volumes:
+            - ./Docker/mysql:/docker-entrypoint-init-db.d
+        environment:
+            - MYSQL_DATABASE=${DB_DATABASE}
+            - MYSQL_USER=${DB_USERNAME}
+            - MYSQL_PASSWORD=${DB_PASSWORD}
+            - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+        networks:
+            - project_name
+
+networks:
+  project_name:
+    driver: bridge
