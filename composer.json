@@ -1,0 +1,29 @@
+{
+    "name": "botcms/core",
+    "description": "core",
+    "type": "library",
+    "authors": [
+        {
+            "name": "DT"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Botcms\\core\\": "src/psr4"
+        },
+        "files": [
+            "src/files/functions.php",
+            "src/files/defined.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Botcms\\Core\\Providers\\ServiceProvider"
+            ],
+            "aliases": {}
+        }
+    }
+}
