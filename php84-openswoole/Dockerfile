@@ -80,7 +80,6 @@ RUN pecl install apcu \
 
 # Set working directory
 WORKDIR /var/www
-ADD . /var/www
-RUN chown -R www-data:www-data /var/www
-RUN chmod -R 777 /var/www/storage
-# USER $user
+USER www-data
+# RUN chown -R www-data:www-data /var/www
+# RUN chmod -R 777 /var/www/storage
